@@ -1,6 +1,7 @@
 #sysbench的安装和做性能测试
 
 sysbench是一个模块化的、跨平台、多线程基准测试工具，主要用于评估测试各种不同系统参数下的数据库负载情况。关于这个项目的详细介绍请看：http://sysbench.sourceforge.net。
+****
 它主要包括以下几种方式的测试：
 1、cpu性能
 2、磁盘io性能
@@ -30,6 +31,7 @@ strip /usr/local/bin/sysbench
 
 二、开始测试
 编译成功之后，就要开始测试各种性能了，测试的方法官网网站上也提到一些，但涉及到 OLTP 测试的部分却不够准确。在这里我大致提一下：
+
 1、cpu性能测试
 
 sysbench --test=cpu --cpu-max-prime=20000 run
