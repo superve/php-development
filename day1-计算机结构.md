@@ -87,16 +87,40 @@
 
 ＋windows
 
-＋Unix
+＋[Unix](http://blog.chinaunix.net/uid-20422917-id-1682761.html)
 
 	  		＋HP－unix
 	
 			＋solaris
 
-			＋AIX（IBM）
+			＋ AIX-IBM
 	
 			＋SCO unix
 	
 			＋ Unixware
 
 +OS/2
+
+****
+##附件
+1. [AIX](http://servers.pconline.com.cn/news/1106/2430487.html)历史
+
+2. [Unix](http://uplook.blog.51cto.com/blog/443306/491614)历史介绍
+
+3. [Linux](http://os.51cto.com/art/201011/232185.htm)发展介绍
+
+4. Linux论坛
+	+ [linuxeden](http://www.linuxeden.com/html/news/20140816/154753.html)
+	+ [linuxsir](http://linuxsir.com)
+
+	+ [linuxsky](http://www.linuxsky.org)
+
+	+ [linux.cn](https://linux.cn)
+
+	+ [linuxDown](http://www.linuxdown.net)
+
+	+ [rpmfind](http://www.rpmfind.net)
+
+	+ [vagrant安装](http://vagrantup.com)
+
+	+ [chinaUnix](http://blog.chinaunix.net)
