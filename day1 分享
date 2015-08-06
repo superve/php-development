@@ -1,0 +1,74 @@
+1. bootstrap http://www.runoob.com/bootstrap/bootstrap-tutorial.html
+
+2. http://www.bootcdn.cn/
+
+3. http://blog.csdn.net/super_marioli/article/details/6952443
+
+4. angular.js http://www.apjs.net/
+
+5. amaze http://amazeui.org/?_ver=2.x
+
+6. backbone http://www.css88.com/doc/backbone/
+
+7. 风雪之隅 http://www.laruence.com/
+
+8. 周爱民 http://blog.csdn.net/aimingoo/ javascript 
+
+9. 玉伯 http://www.csdn.net/article/2013-09-03/2816801-front-end-development-seajs-framework
+
+10. 章文嵩 LVS  http://os.51cto.com/art/201112/306707.htm
+
+11. 书籍 http://yunpan.cn/cVPFPGEjJrrmG （提取码：9767）
+
+http://demo.jb51.net/js/2011/artDialog/_doc/labs.html
+
+<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js"></script>
+h5
+
+
+IE6
+
+
+ajax 邮箱验证 blur  focus
+jquery
+
+
+妹子
+
+
+
+ cdn   加速器  缓存  优化  3s 60% 1s  20w
+
+ http://www.bootcdn.cn/
+
+ DOM 
+
+ document.getElementById('div1').innerHTML =  'this is a test!'
+ $('#div1').html('this is ...');
+
+ $('#div1').css('background','red');
+
+ ajax
+
+
+  yaf 框架 和 库 
+
+
+   Curl  代理 
+
+   PHP 37 深海游戏  17173 叶子猪
+
+
+   抽奖
+   ++++++++++++++++
+	ul  li  float :left 
+	position:abosulte +++ parent: relative left top 文档流
+	div 
+
+	setInterval(fn,5000)
+	animate(fn,5000)
+
+	curl "http://act.yzz.cn/index.php?c=lottery&callback=jQuery17209472992222290486_1438824857297&actid=2757&_=1438824991921" -H "Cookie: yzz_visited_history="%"u6D3B"%"u52A8"%"u9891"%"u9053-"%"u53F6"%"2Chttp"%"3A//act.yzz.cn/; bdshare_firstime=1438824493660; DN5_seccode=81141438824682.65; DN5_auth=786fGTTze7ZNV"%"2B"%"2FBM5Dlimn1j8Ip2huu3JAgqoFIxu3Rk0ChlJlXDLNmVmj8Pfru"%"2BPZhW62KLfsg3Pby8z8s7"%"2BgqPK9rQ1zznR4Sfw; KA5_auth=2631hfPpH5UOKezolx8sP9Pev1clhswHv4s2u2xv2zDxrwbv"%"2Bjb4O2V8NmnP7sHw7oSWE3p6THYs5IaNBxM80GTmSNOtSVkP2dv4nw; Hm_lvt_56907d8458eb9bc257eb4e40a1d6674f=1438824459; Hm_lpvt_56907d8458eb9bc257eb4e40a1d6674f=1438824858; CNZZDATA30030985=cnzz_eid"%"3D611095294-1438824546-http"%"253A"%"252F"%"252Fact.yzz.cn"%"252F"%"26ntime"%"3D1438824910; CNZZDATA30032131=cnzz_eid"%"3D1383837618-1438823341-"%"26ntime"%"3D1438822360" -H "Accept-Encoding: gzip, deflate, sdch" -H "Accept-Language: zh-CN,zh;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36" -H "Accept: text/javascript, application/javascript, application/ecmascript, application/x-ecmascript, */*; q=0.01" -H "Referer: http://act.yzz.cn/s/2015/dhznq/" -H "X-Requested-With: XMLHttpRequest" -H "Connection: keep-alive" --compressed
+
+
+sphinx  中文分词
