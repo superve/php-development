@@ -4,6 +4,8 @@
  * emali: gogery@163.com
  * author:asion
 */
+源码：http://yunpan.cn/cHqfqdQagStBV  访问密码 cb6f
+
 实现方案：使用repcached实现高可用
 repcached：全称 replication cached是由日本人发明的memcached的高可用性技术，简称复制缓冲区技术
 
