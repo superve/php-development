@@ -53,7 +53,7 @@ Codename:      Final
         make: *** [all] Error 2
 
         解决方案：在执行 make 时加上参数 CFLAGS="-march=i686" 就可以了：
-        
+
         make CFLAGS="-march=i686"
 
 8. 修改redis.conf 配置文件（daemonize yes  后台启动）
@@ -73,3 +73,31 @@ Codename:      Final
     > ./redis-benchmark -q -t GET,SET
 
 10. 编译安装完成
+
+11. 安装PHP对redis的扩展 （Cannot find config.m4. 解决方案：进入扩展目录）
+    下载地址：http://pecl.php.net/package/redis
+
+12. 解压文件
+    > cd phpredis-2.2.4
+    > /usr/local/php/bin/phpize
+    > ./configure --with-php-config=/usr/local/php/bin/php-config
+    > make
+    > make install
+
+13. 将生成的 memcache.so 动态库的目录添加到php.ini文件里面
+    > vim /usr/local/php/etc/php.ini
+    > extension_dir = "/usr/local/php/lib/php/extensions/no-debug-non-zts-20090626"
+    > extension=redis.so
+
+14. 到网站根目录添加测试文件 redis.php
+    > cd /var/www/html
+    > vim redis.php
+            <?php
+                $redis = new Redis;
+                $redis->connect('localhost',6379);
+                $redis->set('test', 'hello world');
+                echo $redis->get('test');
+            ?>
+
+12. 在浏览器的地址栏输入 http://localhost/memcache.php
+    输入上述地址后 浏览器页面 输出 hello world ，则成功
