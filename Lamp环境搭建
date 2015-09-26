@@ -1,5 +1,11 @@
 LAMP环境的搭建
 
+lamp源码包：http://yunpan.cn/cHqsvIUPRgEgN  访问密码 ca46
+linux操作系统：http://yunpan.cn/cHqsNzJpiSfQf  访问密码 9412
+mysql源码：http://mirrors.sohu.com/mysql/
+httpd源码：http://apache.fayea.com/httpd/
+PHP源码：http://php.net/downloads.php
+
 ##系统环境查看
 
 [root@asion ~]#   lsb_release  -a
