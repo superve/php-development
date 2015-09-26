@@ -13,7 +13,7 @@ memcache 源码包：http://yunpan.cn/cHqj2cxxYrLWm  访问密码 f143
 LSB-Version:core-4.0-ia32:core-4.0-noarch:graphics-4.0-ia32:gr  aphics-4.0-noarch:printing-4.0-ia32:printing-4.0-noarch
 Distributor ID:  CentOS
 Description:    CentOS release 5.5 (Final)
-Release:        5.
+Release:        5.5
 Codename:      Final
 
 
@@ -66,7 +66,7 @@ Codename:      Final
     > extension_dir = "/usr/local/php/lib/php/extensions/no-debug-non-zts-20090626"
     > extension=memcache.so
     
-10. 到网站根目录添加测试文件 memcache.php
+11. 到网站根目录添加测试文件 memcache.php
     > cd /var/www/html
     > vim memcache.php
             <?php
@@ -76,5 +76,5 @@ Codename:      Final
                 echo $mem->get('test');
            ?>
 
-11. 在浏览器的地址栏输入 http://localhost/memcache.php
+12. 在浏览器的地址栏输入 http://localhost/memcache.php
     输入上述地址后 浏览器页面 输出 hello world ，则成功
