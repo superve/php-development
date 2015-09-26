@@ -1,0 +1,81 @@
+#大型网站提速方案
+
+##如何判定一个网站是大型网站
+
+1. 高访问就是大网站？还是大流量是大型网站？
+    爱站：http://www.aizhan.com/
+    站长工具：http://tool.chinaz.com/
+    高访问网站：https://www.hao123.com
+
+2. 通过几个参数来判定一个大型网站
+        
+    a. PV(page views) ：一个网站内所有页面，24小时内访问次数的总和。一般在100w，1000w以上
+
+    b. UV(unique visitor)：一个网站24小时内的独立访问用户。一般几十万以上
+
+    c. IP(独立IP)：一个网站24小时内访问的IP数，在考虑校园网、局域网的时候，UV数一般略大于IP数(局域网通过一个网关上网
+        多个用户只会记录一个独立IP)
+    
+    总结：PV > UV > IP
+
+3. 大型网站带来的问题
+    
+    a. 高并发：一般是1s内同时访问一个网站的数量
+
+    b. 大流量：大量的用户访问网站，流量会变得很大
+
+    c. 大数据：在访问量巨大的同时，带来的就是大量数据（G、T级别）的检索问题，如何在众多数据中检索出需要的数据
+
+4. 解决方案
+    
+    a. 高并发可以使用 分层来解决(负载均衡)
+        
+        硬件：f5（优点：立竿见影；缺点：价格昂贵，20w左右）
+        
+        软件：nginx(web服务器，负载均衡器),lvs
+                   nginx: http://www.nginx.cn/   http://tengine.taobao.org/   http://nginx.org/
+                   lvs（章文嵩）: http://zh.linuxvirtualserver.org/
+                   问题：什么是C10K问题？
+        
+        负载均衡的策略：1. 轮询  2. NAT  3. 智能DNS
+
+        注意：对Apache实现了分流，但对Mysql，如何解决？同时，如何保证Apache，负载均衡器的高可用？
+                   高可用可以使用冗余技术实现，添加一个监控服务器
+                   软件：keepalive
+    
+    b. 大流量可以使用如下方案解决
+        
+        1. 代码压缩 查看HTTP请求，Apache对主体数据进行压缩，开启Apache的deflate模块
+            > http://blog.csdn.net/cctv_hu/article/details/6018942
+            > http://www.webkaka.com/tutorial/server/2015/021013/
+        
+        2. 合并文件，减少HTTP请求（js、 css），css图片背景的图片精灵(减少请求)
+            > 合并工具： http://tool.oschina.net/jscompress?type=3
+        
+        3. 使用CDN技术加载静态资源
+            > 加速CDN服务： http://www.bootcdn.cn/
+        
+        4. 将服务分散，图片服务器，电脑模块。将不同的模块部署到不同的服务器上面 (上传插件配置上传服务器地址)
+            > PHP FTP 函数：http://www.w3school.com.cn/php/php_ref_ftp.asp
+        
+        5. 升级带宽(100M带宽一年40w左右)
+
+    c. 大数据可以使用缓存技术实现
+
+        1. 磁盘缓存（静态化）：
+            > 1. 真静态：在效率上，生成真实的html文件，将数据从数据库取出之后，生成的静态html保存到磁盘上面，直接访问静态页面就好。不用访问数据库，减轻数据库的压力
+            > 2. 伪静态：在形式上，利用Apache的重写模块来实现 动态的url 转换成静态的url，便于seo（搜索引擎优化），可以防止sql注入
+            例如：
+            动态网站：http://www.php.com?new.php&type=sport&id=12
+            对应的静态网站：http://www.php.com?new-sport-id12.html
+         
+         2. 内存缓存（Nosql技术，memcache、redis、mongodb）：将Mysql取出的数据保存在内存服务器里面，下次请求的时候直接访问内存服务器
+
+         3. 数据库优化：
+            1. 设计上满足三范式 
+            2. 字段上使用合适的属性 
+            3. 合适的使用索引 
+            4. 分区和分表
+            5. 主从复制(读写分离)
+            6. 硬件升级（scale up、还有scale out）
+            7. sphinx存储引擎的使用
