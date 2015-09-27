@@ -1,0 +1,38 @@
+# ctags使用
+
+作用：使用ctags 查看函数定义
+
+相关文章：
+https://packagecontrol.io/browse
+
+http://sourceforge.net/projects/ctags/
+
+http://untidy.net/blog/2006/10/04/ctags-php-5-support/
+
+linux下使用
+        > yum install -y ctags
+        > ctags *
+
+     ctrl  + ]  跳转到函数定义
+     ctrl + o  返回函数调用
+
+windows 下 sublime text3 使用
+
+    > ctrl+shitf+p
+    > Package Controll：Install Package
+    > ctags
+    
+    1. 将地址栏 Preferences>Package Settings>CTags>Settings-default 文件打开
+    
+    2. 复制里面的全部内容到 Preferences>Package Settings>CTags>Settings-user 
+    
+    3. 更改  "command": "C:/ctags/ctags.exe", 
+        注意此处为ctags.exe可执行性文件的绝对路径，必须写上ctags.exe
+    
+    4. 通过CLI进入项目目录，执行 ctags -R -f .tags ，会在项目目录生成一个.tags 文件
+    
+    5. 或者在sublime text3 左侧的项目上右键执行：CTags:Rebulid Tags 即可
+    
+    6. 在项目函数处使用如下命令即可
+    ctrl+t   ctrl+t   //鼠标在函数出执行，跳到函数定义出  
+    ctrl+t   ctrl+b  //返回函数调用 
