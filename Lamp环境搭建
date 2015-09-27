@@ -109,7 +109,7 @@ Codename:      Final
         便能顺利编译安装
 
     i. apache安装
-       > ./configure --prefix=/usr/local/apache2  --sysconfdir=/etc/httd/ --enable-rewrite --enable-so --enable-headers --enable-expires  --enable-modules=most --enable-deflate
+       > ./configure --prefix=/usr/local/apache2  --sysconfdir=/etc/httpd/ --enable-rewrite --enable-so --enable-headers --enable-expires  --enable-modules=most --enable-deflate
 
     (j. ncurses安装(Mysql安装前必须安装这个字符库)源码安装才需要)
 
