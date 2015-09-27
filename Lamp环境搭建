@@ -1,4 +1,4 @@
-LAMP环境的搭建
+#lamp环境的搭建
 
 lamp源码包：http://yunpan.cn/cHqsvIUPRgEgN  访问密码 ca46
 linux操作系统：http://yunpan.cn/cHqsNzJpiSfQf  访问密码 9412
@@ -9,15 +9,10 @@ PHP源码：http://php.net/releases/
 ##系统环境查看
 
 [root@asion ~]#   lsb_release  -a
-
 LSB-Version:core-4.0-ia32:core-4.0-noarch:graphics-4.0-ia32:gr  aphics-4.0-noarch:printing-4.0-ia32:printing-4.0-noarch
-
 Distributor ID:  CentOS
-
 Description:    CentOS release 5.5 (Final)
-
 Release:        5.5
-
 Codename:      Final
 
 
@@ -98,9 +93,20 @@ Codename:      Final
         > make install
 
     h. GD 库的安装
-        > ./configure --prefix=/usr/local/gd2/ --with-jpeg=/usr/local/jpeg6/ --with-freetype=/usr/local/freetype/
+        > ./configure --prefix=/usr/local/gd2/ --with-jpeg=/usr/local/jpeg6/ --with-freetype=/usr/local/freetype/ ./configure --enable-m4_pattern_allow 
         > make
         > make install
+    
+        注意：当make的时候，出现以下错误 
+        configure.ac:64: error: possibly undefined macro: AM_ICONV 
+        If this token and others are legitimate, please use m4_pattern_allow. 
+        See the Autoconf documentation. 
+        make: *** [configure] Error 1 
+        
+        解决方案：
+        解决办法 ，编译加m4_pattern_allow参数 
+        即：./configure --enable-m4_pattern_allow 
+        便能顺利编译安装
 
     i. apache安装
        > ./configure --prefix=/usr/local/apache2  --sysconfdir=/etc/httd/ --enable-rewrite --enable-so --enable-headers --enable-expires  --enable-modules=most --enable-deflate
@@ -112,7 +118,9 @@ Codename:      Final
         >  useradd -g mysql mysql
         
         >  cd /usr/local/mysql-5.5.44-linux2.6-i686/
+        >  chown -R msyql.mysql  .
         >  scripts/mysql_install_db --basedir=/usr/local/mysql  --user=mysql
+        >  chown -R root .
         >  cp support-files/mysql.server /etc/init.d/mysqld
         
         >  chkconfig --add mysqld
@@ -121,8 +129,36 @@ Codename:      Final
         
         >  service mysqld start
         >  ps aux | grep mysqld  
+        
+        注意：/usr/local/mysql/bin/mysqld: error while loading shared libraries: libaio.so.1: cannot open shared object file: No such file or directory
 
-    l. 安装PHP
+        解决方案：libaio.i386 0:0.3.106-5
+        > yum install libaio
+        
+        注意： selinux 必须关闭
+        > sestatus -v
+        > getenforce
+        
+        > 临时关闭
+        > setenforce 0
+        
+        > 修改配置文件需要重启机器：
+        > 修改/etc/selinux/config 文件
+        > 将SELINUX=enforcing改为SELINUX=disabled
+        > 重启机器即可 
+        
+        注意：
+        [root@localhost mysql]# service mysql start
+        Starting MySQL.. ERROR! The server quit without updating PID file (/var/lib/mysql/localhost.localdomain.pid).
+
+        解决方案：
+            1. 注释/etc/my.cnf里的skip-federated注释掉即#skip-federated；
+            2. my.cnf文件配置过高，重新定义其中的参数（根据服务器情况定义）；
+            3. 杀掉mysql_safe和mysqld进程，然后再重启；
+            4. 当前日志文件过大，超出了my.cnf中定义的大小（默认为64M），删除日志文件再重启；
+            5. 其他情况，查看日志文件（本人是/usr/local/data/bogon.error，具体因人而异），然后具体分析；
+
+l. 安装PHP
       > cd /usr/local/src/php-5.3.28
       > ./configure --prefix=/usr/local/php/ --with-config-file-path=/usr/local/php/etc/ --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql=/usr/local/mysql/ --with-libxml-dir=/usr/local/libxml2/ --with-jpeg-dir=/usr/local/jpeg6/ --with-freetype-dir=/usr/local/freetype/ --with-gd=/usr/local/gd2/ --with-mcrypt=/usr/local/libmcrypt/ --with-mysqli=/usr/local/mysql/bin/mysql_config --enable-soap --enable-mbstring=all --enable-sockets 
       >  make
