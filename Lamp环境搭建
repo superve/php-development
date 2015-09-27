@@ -93,7 +93,7 @@ Codename:      Final
         > make install
 
     h. GD 库的安装
-        > ./configure --prefix=/usr/local/gd2/ --with-jpeg=/usr/local/jpeg6/ --with-freetype=/usr/local/freetype/ ./configure --enable-m4_pattern_allow 
+        > ./configure --prefix=/usr/local/gd2/ --with-jpeg=/usr/local/jpeg6/ --with-freetype=/usr/local/freetype/ --enable-m4_pattern_allow 
         > make
         > make install
     
