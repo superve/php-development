@@ -78,3 +78,10 @@ Codename:      Final
 
 12. 在浏览器的地址栏输入 http://localhost/memcache.php
     输入上述地址后 浏览器页面 输出 hello world ，则成功
+
+【注意】
+Linux下使用telnet退格无法生效
+
+解决方案：
+Ctrl + Backspace
+直接退出：Ctrl + ]，然后 quit
