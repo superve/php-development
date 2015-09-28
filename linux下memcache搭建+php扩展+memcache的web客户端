@@ -79,6 +79,11 @@ Codename:      Final
 12. 在浏览器的地址栏输入 http://localhost/memcache.php
     输入上述地址后 浏览器页面 输出 hello world ，则成功
 
+13. 可以使用memcache的web客户端工具 memadmin 来实现对memcache的远程使用
+    使用：
+        a. 直接将 memadmin 上传到网站的根目录即可，可以查看下memadmin下的config.php 文件实现配置
+        b. 在浏览器地址栏输入 http://ip/memadmin 即可访问
+
 【注意】
 Linux下使用telnet退格无法生效
 
