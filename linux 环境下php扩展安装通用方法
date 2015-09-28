@@ -23,3 +23,33 @@
     > extension=mbstring.so
 
 6. 使用 phpinfo() 函数测试 
+
+注意：安装php的mcrypt时候出现问题？
+    
+    问题描述：在php对mcrypt的扩展时候，出现mcrypt.h not found. Please reinstall libmcrypt
+
+    解决方案：1. 使用第三方的yum源来解决
+    
+                    >   wget http://www.atomicorp.com/installers/atomic
+
+                    >    sh ./atomic  
+
+                    >    yum  install  php-mcrypt  libmcrypt  libmcrypt-devel
+
+              2. 使用php mcrypt 前必须先安装libmcrypt
+
+                libmcrypt源码安装方法：
+
+                    > cd /usr/local/src
+    
+                    > wget http://softlayer.dl.sourceforge.net/sourceforge/mcrypt/libmcrypt-2.5.8.tar.gz
+    
+                    > tar -zxvf libmcrypt-2.5.8.tar.gz
+    
+                    > cd /usr/local/src/libmcrypt-2.5.8
+    
+                    > ./configure --prefix=/usr/local
+    
+                    > make
+    
+                    > make install
