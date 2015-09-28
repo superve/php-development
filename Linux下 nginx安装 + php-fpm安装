@@ -1,0 +1,167 @@
+#Linux下 nginx安装 + php-fpm安装
+
+1. 编译环境准备
+
+	> yum -y install gcc automake autoconf libtool make  gcc  gcc-c++
+
+2. 一般都需要先装pcre、 zlib，前者为了重写rewrite，后者为了gzip压缩
+	源代码目录：/usr/local/src
+
+3. 安装pcre 和 zlib 和 ssl
+
+	> cd /usr/local/src
+	> wget ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.34.tar.gz 
+	> tar -zxvf pcre-8.34.tar.gz
+	> cd pcre-8.34
+	> ./configure
+	> make
+	> make install
+
+
+	> cd /usr/local/src
+	> wget http://zlib.net/zlib-1.2.8.tar.gz
+	> tar -zxvf zlib-1.2.8.tar.gz
+	> cd zlib-1.2.8
+	> ./configure
+	> make
+	> make install
+
+
+	> cd /usr/local/src
+	> wget http://www.openssl.org/source/openssl-1.0.1c.tar.gz
+	> tar -zxvf openssl-1.0.1c.tar.gz
+	
+4. nginx 安装
+
+	> cd /usr/local/src
+	> wget http://nginx.org/download/nginx-1.4.2.tar.gz
+	> tar -zxvf nginx-1.4.2.tar.gz
+	> cd nginx-1.4.2
+
+	> ./configure --sbin-path=/usr/local/nginx/nginx  \
+	--conf-path=/usr/local/nginx/nginx.conf  \
+	--pid-path=/usr/local/nginx/nginx.pid
+	
+	> make
+	> make install
+
+5. 安装成功后，/usr/local/nginx 目录下如下
+	fastcgi.conf            koi-win             nginx.conf.default
+	fastcgi.conf.default    logs                scgi_params
+	fastcgi_params          mime.types          scgi_params.default
+	fastcgi_params.default  mime.types.default  uwsgi_params
+	html                    nginx               uwsgi_params.default
+	koi-utf                 nginx.conf          win-utf
+
+6. 启动之前先确保 80 端口没有被占用，执行 /usr/local/nginx/nginx 启动
+	
+	> netstat -an | grep 80
+	
+	> lsof -i | grep 80
+
+	> netstat -tunpl | grep 80
+
+	> /usr/local/nginx/nginx
+
+7. fpm-php 安装(5.3.3之后默认自带 加上参数 --enable-fpm 开启)
+
+	> tar -zxvf php-5.3.28.tar.gz
+
+	> cd php-5.3.28
+
+	> ./configure --prefix=/usr/local/php  --enable-fpm 
+
+8. 更改nginx的配置文件 nginx.conf ，增加，并增加php-fpm的配置文件
+	
+	location ~ \.php$ {
+		root html;
+		fastcgi_pass 127.0.0.1:9000;
+		fastcgi_index index.php;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		include fastcgi_params;
+	}
+
+	
+	> cd /usr/local/phpfpm/etc
+
+	> cp php-fpm.conf.default php-fpm.conf
+
+9. 将 fpm-php 加入系统服务 (/usr/local/src/php-5.3.28/ )，并启动
+	
+	> cp ./sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+	
+	> chmod +x /etc/init.d/php-fpm
+
+	> chkconfig --add php-fpm
+
+	>chkconfig php-fpm on
+
+	> service php-fpm start
+
+10. 使用 phpinfo() 函数测试即可
+
+附：
+I. 在编译安装时候可能遇到的一些问题
+	a. 编译pcre错误
+	libtool: compile: unrecognized option `-DHAVE_CONFIG_H'
+	libtool: compile: Try `libtool --help' for more information.
+	make[1]: *** [pcrecpp.lo] Error 1
+	make[1]: Leaving directory `/usr/local/src/pcre-8.34'
+	make: *** [all] Error 2
+
+	解决方案：
+
+	> yum install -y g++
+
+	make 时候出错
+
+	解决方案：
+	> yum -y install openssl openssl-devel
+II. nginx编译选项
+
+	a. configure命令是用来检测你的安装平台的目标特征的。它定义了系统的各个方面，包括nginx的被允许使用的连接处理的方法，比如它会检测你是不是有CC或GCC，并不是需要CC或GCC，它是个shell脚本，执行结束时，它会创建一个Makefile文件
+
+	b. make是用来编译的，它从Makefile中读取指令，然后编译
+
+	c. make install是用来安装的，它也从Makefile中读取指令，安装到指定的位置
+
+	nginx的configure命令支持以下参数：
+
+		--prefix=PATH  定义一个安装目录，也就是nginx的安装目录。默认使用 /usr/local/nginx
+
+		--sbin-path=PATH 设置nginx的可执行文件的路径，默认为  prefix/sbin/nginx
+
+		--conf-path=PATH  设置在nginx.conf配置文件的路径。nginx允许使用不同的配置文件启动，通过命令行中的-c选项。默认为prefix/conf/nginx.conf
+
+		--pid-path=PATH  设置nginx.pid文件，将存储的主进程的进程号。安装完成后，可以随时改变的文件名 ， 在nginx.conf配置文件中使用 PID指令。默认情况下，文件名 为prefix/logs/nginx.pid
+
+		--error-log-path=PATH 设置主错误，警告，和诊断文件的名称。安装完成后，可以随时改变的文件名 ，在nginx.conf配置文件中 使用 的error_log指令。默认情况下，文件名 为prefix/logs/error.log
+
+		--http-log-path=PATH 设置主请求的HTTP服务器的日志文件的名称。安装完成后，可以随时改变的文件名 ，在nginx.conf配置文件中 使用 的access_log指令。默认情况下，文件名 为prefix/logs/access.log
+
+		--user=name 设置nginx工作进程的用户，默认的用户名是nobody
+
+		--group=name  设置nginx工作进程的用户组。安装完成后，可以随时更改的名称在nginx.conf配置文件中 使用的 user指令。默认的为非特权用户。
+
+		--with-select_module --without-select_module 启用或禁用构建一个模块来允许服务器使用select()方法。该模块将自动建立，如果平台不支持的kqueue，epoll，rtsig或/dev/poll
+		
+		--with-poll_module --without-poll_module 启用或禁用构建一个模块来允许服务器使用poll()方法。该模块将自动建立，如果平台不支持的kqueue，epoll，rtsig或/dev/poll
+
+		--without-http_gzip_module 不编译压缩的HTTP服务器的响应模块。编译并运行此模块需要zlib库
+
+		--without-http_rewrite_module 不编译重写模块。编译并运行此模块需要PCRE库支持
+
+		--without-http_proxy_module 不编译http_proxy模块
+		
+		--with-http_ssl_module  使用https协议模块。默认情况下，该模块没有被构建。建立并运行此模块的OpenSSL库是必需的
+
+		--with-pcre=PATH 设置PCRE库的源码路径。PCRE库的源码（版本4.4 - 8.30）需要从PCRE网站下载并解压。其余的工作是Nginx的./ configure和make来完成。正则表达式使用在location指令和 ngx_http_rewrite_module 模块中
+
+		--with-pcre-jit 编译PCRE包含just-in-time compilation”（1.1.12中， pcre_jit指令）
+
+		--with-zlib=PATH 设置的zlib库的源码路径。要下载从 zlib（版本1.1.3 - 1.2.5）的并解压。其余的工作是Nginx的./ configure和make完成。ngx_http_gzip_module模块需要使用zlib 
+		
+		--with-cc-opt=parameters
+		 设置额外的参数将被添加到CFLAGS变量。例如,当你在FreeBSD上使用PCRE库时需要使用:--with-cc-opt="-I /usr/local/include。.如需要需要增加 select()支持的文件数量:--with-cc-opt="-D FD_SETSIZE=2048"
+
+		--with-ld-opt=parameters 设置附加的参数，将用于在链接期间。例如，当在FreeBSD下使用该系统的PCRE库,应指定:--with-ld-opt="-L /usr/local/lib"
