@@ -15,11 +15,11 @@
 
 4. 运行yum makecache生成缓存
 
-[root@localhost yum.repos.d]# yum makecache
+  [root@localhost yum.repos.d]# yum makecache
 
 5. 更新系统
 
-[root@localhost yum.repos.d]# yum -y update
+  [root@localhost yum.repos.d]# yum -y update
 
 ***
 
