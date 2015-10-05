@@ -1,25 +1,25 @@
 #CentOS更改yum源与更新系统
 
 1. 首先备份/etc/yum.repos.d/CentOS-Base.repo
-
-  mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+	
+	> mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
 
 2. 进入yum源配置文件所在文件夹
 
-  [root@localhost yum.repos.d]# cd /etc/yum.repos.d/
+ > cd /etc/yum.repos.d/
   
 3. 下载163的yum源配置文件，放入/etc/yum.repos.d/(操作前请做好相应备份)，同时
 提供sohu源（wget http://mirrors.sohu.com/help/CentOS-Base-sohu.repo）
 
-  [root@localhost yum.repos.d]# wget http://mirrors.163.com/.help/CentOS6-Base-163.repo
+	>  wget http://mirrors.163.com/.help/CentOS6-Base-163.repo
 
 4. 运行yum makecache生成缓存
 
-  [root@localhost yum.repos.d]# yum makecache
+	> yum makecache
 
 5. 更新系统
 
-  [root@localhost yum.repos.d]# yum -y update
+	> yum -y update
 
 ***
 
@@ -30,19 +30,19 @@
 + 通过以下命令安装:
 + CentOS 6.x 32-bit
 
-  rpm -Uvh http://mirror.overthewire.com.au/pub/epel/6/i386/epel-release-6-7.noarch.rpm
+	  > rpm -Uvh http://mirror.overthewire.com.au/pub/epel/6/i386/epel-release-6-7.noarch.rpm
 
 + CentOS 6.x 64-bit
   
-  rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-7.noarch.rpm
+	  > rpm -Uvh http://download.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-7.noarch.rpm
 
 + CentOS 5.x 32-bit
 
-  rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
+	 > rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/i386/epel-release-5-4.noarch.rpm
 
 + CentOS 5.x 64-bit
   
-  rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm
+	  > rpm -Uvh http://dl.fedoraproject.org/pub/epel/5/x86_64/epel-release-5-4.noarch.rpm
 
 想暂停使用EPEL，在下面的文件中设置enabled=0即可.
 
