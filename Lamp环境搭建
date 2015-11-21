@@ -118,7 +118,7 @@ Codename:      Final
         >  useradd -g mysql mysql
         
         >  cd /usr/local/mysql-5.5.44-linux2.6-i686/
-        >  chown -R msyql.mysql  .
+        >  chown -R mysql.mysql  .
         >  scripts/mysql_install_db --basedir=/usr/local/mysql  --user=mysql
         >  chown -R root .
         >  cp support-files/mysql.server /etc/init.d/mysqld
