@@ -1,0 +1,87 @@
+一、简述Linux的相关历史
+	1. Unix
+	2. Gun（GPL）
+	3. Linux
+
+二、Linux操作系统的安装
+	1. 了解什么是虚拟机软件以及常见的分类
+	2. VMware 安装
+	3. CentOs 安装
+
+三、简述Linux命令格式
+	开启命令终端后会出现命令提示符，期待用户的输入 
+	例如：[root@localhost ~] # 
+	# 超级管理员
+	$ 普通用户
+
+	命令格式
+		命令 选项 参数
+			 
+			选项：用来修饰命令
+				短选项 -
+					接受单个字符，多个选项可以组合起来，并且顺序可以调换位置
+				长选项 --
+					接受一个单词，但是不能组合使用，只能分开
+
+			参数：命令作用的对象
+	例如：
+	[root@localhost ~] # ls -l
+	[root@localhost ~] # ls -a
+	[root@localhost ~] # ls -la
+	[root@localhost ~] # ls -al
+
+	[root@localhost ~] # ls --all
+
+	如何获取命令的帮助？
+	[root@localhost ~] # man ls
+
+	如何实现用户的登录和切换？(使用login登录程序打印的登录界面，计算机属于稀缺资源，只有具有登录权限的用户才可以获取资源)
+	[root@localhost ~] # su - asion
+
+	1. ls
+	2. clear
+	3. pwd
+	4. cd
+
+四、掌握Linux的文件系统树
+	Linux的文件系统树就是一棵倒置的树
+
+五、掌握文件系统树的跳转
+	1. 了解相对路径和绝对路径的概念
+
+六、掌握远程连接Linux服务器
+	1. putty使用（了解）
+	2. xshell使用（熟练）
+
+七、掌握文件和文件夹相关的命令
+	1. touch
+	2. mv
+	3. rm
+	4. cp
+	5. mkdir
+
+
+/**********常见学习网站************/
+https://linux.cn/article-5893-1.html
+http://www.linuxeden.com/index.php
+http://releases.ubuntu.com/14.04.3/
+http://www.linfo.org/
+http://www.51-n.com/10-1/
+http://www.wuxiancheng.cn/
+http://www.ituring.com.cn/book/1277
+http://emuch.net/html/201206/4571925.html
+http://www.zhaonew.com/
+http://bbs.feng.com/read-htm-tid-4998822.html
+https://www.kernel.org/
+http://tour.ubuntu.com/zh-CN/
+
+
+
+/**********作业************/
+1. 了解什么操作系统的内核，以及现在Linux发行版主流的内核版本是哪个？
+2. 掌握常见开源软件的协议之间的区别
+3. 如何在Linux下递归的创建文件？
+4. 了解什么是vi，vim，emacs？
+5. 找出五本Linux相关的书籍（pdf版本的）
+6. 了解至少三条Linux的哲学思想
+7. 了解github，以及如何在上面书写博客（github pages）
